@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class Home extends AppCompatActivity {
-Button scan;
+Button scan, b2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +23,8 @@ Button scan;
             }
         });
 
-
+b2=findViewById(R.id.button2);
+b2.setText(MainActivity.textScaned);
 
     }
 }

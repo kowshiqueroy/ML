@@ -1,6 +1,7 @@
 package com.example.parthpathak.androidtextrecognition;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.vision.CameraSource;
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     CameraSource cameraSource;
     final int RequestCameraPermissionID = 1001;
+
+    public static String textScaned;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -54,6 +58,17 @@ public class MainActivity extends AppCompatActivity {
 
         cameraView = (SurfaceView) findViewById(R.id.surface_view);
         textView = (TextView) findViewById(R.id.text_view);
+
+
+        findViewById(R.id.buttonok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Main = new Intent(getApplicationContext(), Home.class);
+                startActivity(Main);
+            }
+        });
+
+
 
         TextRecognizer textRecognizer = new TextRecognizer.Builder(getApplicationContext()).build();
         if (!textRecognizer.isOperational()) {
@@ -114,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                                     stringBuilder.append("\n");
                                 }
                                 textView.setText(stringBuilder.toString());
+                                textScaned=stringBuilder.toString();
                             }
                         });
                     }
